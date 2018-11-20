@@ -24,6 +24,18 @@ version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
 
+buildscript {
+    ext {
+        springBootVersion = '2.1.0.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
 repositories {  //仓库
     mavenLocal()//本地的Maven仓库
     mavenCentral()//中心Maven仓库
@@ -41,21 +53,21 @@ dependencies {//依赖
 }
 
 //闭包
-def creeteDir={
-      path->
-      File dir=new File(path);
-            if(!dir.exists()){
-                  dir.mkdirs();
-            }
+def createDir={
+    path->
+        File dir=new File(path)
+        if(!dir.exists()){
+            dir.mkdirs()
+        }
 }
 
 //任务
 task makeJavaDir(){
-dependsOn '依赖'
-      def paths=['src/main/java','src/main/resource','src/test/java','src/test/resource'];
-      doFirst{//自定义动作
-            paths.forEach(create)
-      }
+//    dependsOn '依赖'
+    def paths=['src/main/java','src/main/resources','src/test/java','src/test/resources']
+    doFirst{//自定义动作
+        paths.forEach(createDir)
+    }
 }
 
 configurations.all{

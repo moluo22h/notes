@@ -62,6 +62,7 @@ test("xxx")
 可选参数
 用问号设置参数为默认值
 可选参数需要申明在必选参数之后
+
 > 注意：使用可选时，要处理可选参数为空的情况
 
 ```ts
@@ -89,6 +90,7 @@ function fun1(...args){
 ## generator函数
 手动暂停和恢复代码执行
 TypeScript编译器： babel
+
 ```ts
 function* dosomething(){
     console.log("start")
@@ -156,14 +158,6 @@ var sum =()=>{
 var sum=arg1=>{
     
 }
-
-
-
-
-
-
-
-
 ```
 
 

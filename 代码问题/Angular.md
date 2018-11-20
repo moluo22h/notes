@@ -1,5 +1,9 @@
 # Angular
 
+## Can't bind to 'formControl' since it isn't a known property of 'input'
+原因：未引入ReactiveFormsModule模块
+解决方式：在对应模块的@ngModule注解的declarations中加入ReactiveFormsModule
+
 ##  Cannot find control with name
   原因：
 
@@ -22,5 +26,8 @@
     ProductInstancePropService, {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true}
   ]
   ```
+
+## Could not find module "@angular-devkit/build-angular"
+解决方法：npm i --save-dev @angular-devkit/build-angular
 
 
