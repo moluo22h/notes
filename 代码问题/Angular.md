@@ -30,4 +30,8 @@
 ## Could not find module "@angular-devkit/build-angular"
 解决方法：npm i --save-dev @angular-devkit/build-angular
 
+## Cannot read property 'all' of undefined
+解决方法一:初始化相关数据
+解决方法二：使用"？."来取数据，而不直接用"."
+
 
