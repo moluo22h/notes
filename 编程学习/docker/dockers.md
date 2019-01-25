@@ -1,0 +1,126 @@
+查看docker版本：docker version
+
+产看docker进程：ps -ef  | grep docker
+
+Docker Image 概述
+
+Image是文件和meda data的集合（root fileSystem）
+
+分层的，并且每一层都可以添加改变、删除文件，成为一个新的image
+
+不同的image可以共享相同的layer
+
+Image本身是read-only的
+
+产看本地镜像：docker image ls
+
+build from Dockerfile文件build
+
+```
+FROM ubuntu:14.04
+LABEL maintarner=
+```
+
+
+
+id/hello-world
+
+docker login
+
+docker image push（docker push）xiaopeng16/helloworld:latest
+
+dockerfile
+
+docker run -d -p 5000:
+
+
+
+docker image rm
+
+docker build -t 10.75.44.222:5000/hello-world
+
+ls /etc/docker/daemon.json
+
+```
+{"insecure-registries":["10.75.44.222:5000"]}
+```
+
+/lib/systemd/system/docker.service
+
+```
+EnvironmentFile=/etc/docker/daemon.json
+```
+
+service docker restart
+
+## dockerfile 实践
+
+```python
+from flask import Flask
+app=Flask(__name__)
+@app.route('/')
+def hello():
+	return "hello docker"
+if __name__ == '__main__':
+	app.run()
+```
+
+python app.py
+
+pip install flask
+
+
+
+docker build -t xiaopeng163/flask-hello-world .
+
+docker run -it bca3fb01e12f /bin/bash
+
+exit
+
+查看
+
+* 查看docker版本：docker version
+* 查看docker本地镜像：docker images
+* 查看运行中的容器：docker ps
+* 查看所有容器：docker ps -a
+* 搜索仓库中镜像：docker search <image>
+
+产生
+
+指定名字：docker run -d --name=demo moluo/flask-hello-world
+
+启动
+
+* 重启容器：docker start
+* 查看容器详情：docker inspect <CONTAINER ID>
+* 容器端口映射：docker run -d -p 8888:5000  <IMAGE>
+
+执行
+
+* 执行容器：docker run moluo/flask-hello-world
+* 后台执行容器：docker run -d moluo/flask-hello-world
+* 执行容器的bash：docker exec -it <CONTAINER ID> /bin/bash
+* 执行容器的程序：docker exec -it <CONTAINER ID> python
+* 停止容器：docker container stop
+* 清理容器：docke rm $(docker ps -aq)
+
+docker logs <CONTAINER ID>
+
+产看系统进程：ps -ef | grep python
+
+
+
+## CentOs命令
+
+* 查看操作系统发行版信息：cat /etc/issue
+
+* 查看ip：ip addr
+* top
+
+## Ubuntu命令
+
+* 安装软件：apt-get update && apt-get install -y stress
+* 查看软件位置：which <软件包名>
+
+
+
