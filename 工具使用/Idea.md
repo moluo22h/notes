@@ -37,6 +37,8 @@ ctrl+j
 ## 运行Java测试类时报Command line is too long. Shorten command line for $classname.
 解决方法：https://blog.csdn.net/manyu_java/article/details/78993294
 
+## pull失败问题
+解决方法：https://blog.csdn.net/qq_33039699/article/details/82866785
 
 ## idea激活码
 激活服务器：http://idea.wrbugtest.tk/

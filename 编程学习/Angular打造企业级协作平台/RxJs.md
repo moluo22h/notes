@@ -1,0 +1,195 @@
+# RxJS
+```js
+const height=document.getElementById('height');
+const height$=Rx.Observable.fromEvent(height,'keyup');
+height$.subscribe(val=>console.log(var.target.value));
+```
+流的合并
+```js
+height$=Rx.Observable.fromEvent(height,'keyup').pluck('target','value');
+width$=Rx.Observable.fromEvent(width,'keyup').pluck('target','value');
+consta area$=Rx.observable.combineLatest(lenth$,width$,(l,w)=>{return l*w;});
+area$.subscribe(val=>area.innerHTML=val)
+```
+> 两个都出现新值：Rx.observable.zip()
+把任何变化都变成一个流
+
+## 常见操作符
+创建类操作符
+from：可以把数组、promise、以及Iterable转化为Observable
+fromEvent：可以把事件转化为Observable
+of：接收一系列的数据，并把他们emit出去
+
+转化操作符
+map
+mapTo
+pluck
+
+map（x=>10*x）
+> 注意：mapTo 类似于 map(_ =>2)
+
+```
+getQuote():Observable<Quote>{
+    const uri='${this.config.uri}/quotes/${Math.floor(Math.random()*10)}';
+    return this.http.get(uri).map(res=>res.json() as Quete);
+}
+```
+
+Observable的性质
+三种状态：next、error、complete
+特殊类型：永不结束、Never、Empty（结束但不发射），Throw
+常见工具操作符：do
+变换操作符：scan
+常见数字类操作符：reduce
+过滤类操作符：filter、take、first/last、skip...
+创建类操作符：Interval、Timer
+
+Interval 多少毫秒发射一次
+```js
+const interval$=Rx.Observale.interval(100).take(3);
+interval$.subscribe(
+	function(val){
+		console.log(val);
+	}
+	function(err){
+		console.log(err);
+	}
+	function(){
+		console.log('I`m coplete');
+	}
+);
+const interval$=Rx.Observale.interval(100).take(3);
+interval$.subscribe(
+	val=>console.log(val),
+	err=>console.log(err),
+	()=>console.log('I`m coplete')
+);
+```
+
+Timer：指定时间执行（单个参数）；指定时间及时间间隔执行（两个参数）
+```js
+const Timer$=Rx.Observable.timer(1000,100)
+```
+
+```js
+const interval$=Rx.Observale.interval(100)
+	.map(val=>val*2)
+	.do(v=console.log('val is'+v))
+	.take(3);
+interval$.subscribe(
+	val=>console.log(val),
+	err=>console.log(err),
+	()=>console.log('I`m coplete')
+);
+```
+do操作符，提前做一些事
+```js
+const interval$=Rx.Observale.interval(100)
+	.filter(val=>val%2=0)
+	.do(v=console.log('val is'+v))
+	.take(3);
+interval$.subscribe(
+	val=>console.log(val),
+	err=>console.log(err),
+	()=>console.log('I`m coplete')
+);
+```
+take：区第几个
+filst：取第一个
+last：取最后一个
+skip：跳过几个元素
+scan： x 记住之前的运行结果
+const interval$=Rx.Observale.interval(100)
+	.filter(val=>val%2=0)
+	.scan((x,y)=>return x+y)
+	.take(4);
+interval$.subscribe(
+	val=>console.log(val),
+	err=>console.log(err),
+	()=>console.log('I`m coplete')
+);
+```
+reduce： x 记住之前的运行结果，只输出最后一个元素的值
+
+指定初始值[]，表示做一个数组输出
+​```js
+const interval$=Rx.Observale.interval(100)
+	.filter(val=>val%2=0)
+	.take(4)
+	.reduce((x,y)=>{return [...x,y]},[]);
+interval$.subscribe(
+	val=>console.log(val),
+	err=>console.log(err),
+	()=>console.log('I`m coplete')
+);
+```
+
+```js
+const interval$=Rx.Observale.interval(100)
+	.throw('出错了')
+	.filter(val=>val%2=0)
+	.take(4)
+	.reduce((x,y)=>{return [...x,y]},[]);
+interval$.subscribe(
+	val=>console.log(val),
+	err=>console.log(err),
+	()=>console.log('I`m coplete')
+);
+```
+emple：直接结束，never：永不结束
+
+
+自定义操作符
+```typeScript
+declare module 'rxjs/Observable'{
+    interface Observable<T>{
+        debug:(...any)=>Observale<T>;
+    }
+}
+Observable.prototype.debug=function(message:string){
+    return this.do(
+        (next)=>{
+            if(!environment.production){
+                console.log(message,next);
+            }
+        },
+        (err)=>{
+            if(!environment.production){
+                console.error('ERROR>>',message,err);
+            }
+        }，
+        ()=>{
+            if(!environment.production){
+                console.log('completed');
+            }
+        }，
+    )
+}
+```
+
+过滤类操作符：debounce、debounceTime
+过滤类操作符：distinct，destinctUntilChanged
+合并类操作符：merge、concat、startWith
+合并类操作符：combineLatest、withLatestFrom、zip
+
+debounce：率波器
+```
+const lengh$=Rx.Observable.fromEvent(length,'keyup')
+	.pluck('target','value')
+	.debounce(300);
+	
+const lengh$=Rx.Observable.fromEvent(length,'keyup')
+	.pluck('target','value')
+	.debounce(()=>Rx.Observable.interval(300));
+```
+
+distinct：没用重复元素
+startWith：赋初始值
+
+ng g class reducers/auth.reducer --spec true
+```TypeScript
+
+
+```
+
+
