@@ -72,3 +72,12 @@ secureCRT和Xshell登录Ubuntu http://www.linuxidc.com/Linux/2012-04/58745.htm
 更多Ubuntu相关信息见Ubuntu 专题页面 http://www.linuxidc.com/topicnews.aspx?tid=2
 
 共享资源，帮助你我他
+
+## 开启root用户ssh权限
+
+1.输入命令"sudo apt -y install openssh-server"，等待完成openssh-server安装。
+2.编辑配置 sudo vi/etc/ssh/sshd_config
+3.在行"#PermitRootLogin prohibit-password"后添加行"PermitRootLogin yes"并保存。
+4.输入命令"sudo update-rc.d ssh defaults"开启ssh服务开机自启动
+5.输入命令"sudo service sshd start"启动服务
+6.输入命令"sudo service sshd status"查看服务运行状态，"active(running)"说明服务正常。
