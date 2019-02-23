@@ -34,4 +34,51 @@
 解决方法一:初始化相关数据
 解决方法二：使用"？."来取数据，而不直接用"."
 
+## 随机文字
+
+lorem+tab
+
+## 'app-navbar' is not a known element:
+
+解决步骤：
+
+1. 检查app-navbar组件是否被其组件导出，导出
+
+   ```typescript
+   @NgModule({
+     declarations: [
+       NavbarComponent,
+       FooterComponent
+     ],
+     imports: [
+       CommonModule
+     ],
+     exports:[
+       NavbarComponent,
+       FooterComponent
+     ]
+   })
+   ```
+2. 检出使用app-navbar组件的模块是否导入app-navbar组件所处的模块
+
+## has been blocked by CORS policy
+
+使用代理
+
+proxy.conf.json
+
+```json
+{
+  "/user/**": {
+    "target": "http://localhost:9000",
+    "secure": false
+  }
+}
+```
+
+package.json
+
+```json
+"start": "ng serve --proxy-config proxy.conf.json"
+```
 
