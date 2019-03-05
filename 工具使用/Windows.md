@@ -22,3 +22,9 @@ slmgr.vbs -xpr
 ```
 
 出现的窗口中提示“计算机已永久激活”，说明激活成功，否则未激活成功。
+
+## 开机自启动目录
+
+C:\Users\用户名\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup
+
+C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp
