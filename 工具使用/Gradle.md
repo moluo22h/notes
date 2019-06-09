@@ -89,3 +89,10 @@ mavenLocal/mavenCentral/jcenter
 
 各版本Gradle下载地址
 [Gradle Distributions](http://services.gradle.org/distributions/)
+
+## Gradle修改本地仓库的位置
+
+设置环境变量GRADLE_USER_HOME的路径，就可改变gradle的缓存目录
+
+参考：[Gradle修改本地仓库的位置](https://blog.csdn.net/baiyicanggou_wujie/article/details/80319377)
+

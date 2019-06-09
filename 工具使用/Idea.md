@@ -1,5 +1,21 @@
 # idea使用
+
+## idea搜索功能
+
+| 快捷键              | 描述                                                         |
+| ------------------- | ------------------------------------------------------------ |
+| Ctrl+N              | 按名字搜索类，输入类名可以定位到这个类文件                   |
+| Ctrl+Shift+N        | 按文件名搜索文件，匹配所有类型的文件                         |
+| Ctrl+H              | 查看类的继承关系                                             |
+| Ctrl+Alt+B          | 查看子类方法实现                                             |
+| Alt+F7              | 查找类或方法在哪被使用                                       |
+| Ctrl+F/Ctrl+Shift+F | 按照文本的内容查找。其中Ctrl+F是在本页查找，Ctrl+Shift+F是全局查找 |
+| Shift+Shift         | 搜索任何東西                                                 |
+
+参考[intellij idea 怎么全局搜索](https://jingyan.baidu.com/article/29697b9163ac7dab20de3cbf.html)
+
 ## 跳转到接口实现类快捷键
+
 ctrl+alt+B
 ## 创建类时自动生成author和date
 在File and Code Tempplaes -> Includes -> File Header中添加
