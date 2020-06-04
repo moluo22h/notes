@@ -1,13 +1,3 @@
-sudo apt-get install python
-
-pip install virtualenv
-
-pip install -i https://pypi,douban.com/simple/ django
-
-virtualenv scrapytest
-
-source activate.bat 
-
 ## 基础知识
 scrapy vs requests+beautifulsoup
 

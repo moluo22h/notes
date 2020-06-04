@@ -88,7 +88,9 @@ dependencies {
 }
 ```
 
+## IDEA中编写并运行shell脚本
 
+https://blog.csdn.net/u012443641/article/details/81295999
 
 ## idea激活码
 激活服务器：http://idea.wrbugtest.tk/
@@ -108,8 +110,6 @@ wget --no-check-certificate -O jetbrains.sh https://mengniuge.com/download/shell
    程序运行后，将开启1027激活端口，如果开启了防火墙，则需要放行1027端口。在JetBrains的软件激活过程中， 选择License server，填写http://你的IP:1027即可。其中的IP是你服务器的IP。
 
 > 注意：本方法无法激活2018.2以上版本的JetBrains
-
-
 
 博客： https://www.jiweichengzhu.com/article/a45902a1d7284c6291fe32a4a199e65c 
 
