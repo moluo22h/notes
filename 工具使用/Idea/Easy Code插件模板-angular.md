@@ -951,7 +951,7 @@ export class $!{tableInfo.name}ListComponent implements OnInit {
 
     const modal = this.modal.confirm({
       nzTitle: '删除$!{tableInfo.comment}',
-      nzContent: '确定删除$!{tableInfo.comment}" ' + $!tool.firstLowerCase($!{tableInfo.name}).title + ' "吗？',
+      nzContent: '确定删除$!{tableInfo.comment}" ' + $!{tool.firstLowerCase($!{tableInfo.name})}.name + ' "吗？',
       nzOnOk: () => {
         this.delete$!{tableInfo.name}($!tool.append($!tool.firstLowerCase($!{tableInfo.name}),".id"));
       }
@@ -1090,7 +1090,7 @@ export class $!{tableInfo.name}ListComponent implements OnInit {
     const sortField = null;
     const sortOrder = null;
     const filter: Array<{ key: string; value: string[] }> = new Array<{ key: string; value: string[] }>();
-    filter.push({key: 'title', value: [this.queryParamValue]});
+    filter.push({key: 'name', value: [this.queryParamValue]});
     this.query$!{tableInfo.name}s(this.pageIndex, this.pageSize, sortField, sortOrder, filter);
   }
 
@@ -1105,7 +1105,7 @@ export class $!{tableInfo.name}ListComponent implements OnInit {
     const sortField = (currentSort && currentSort.key) || null;
     const sortOrder = (currentSort && currentSort.value) || null;
     // 获取搜索框中的数据，添加至过滤条件中
-    filter.push({key: 'title', value: [this.queryParamValue]});
+    filter.push({key: 'name', value: [this.queryParamValue]});
     this.query$!{tableInfo.name}s(pageIndex, pageSize, sortField, sortOrder, filter);
   }
 }
