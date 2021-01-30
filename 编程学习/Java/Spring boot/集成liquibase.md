@@ -52,5 +52,11 @@ implementation 'org.liquibase:liquibase-core'
 
 
 
+已有数据库迁移命令
+
+```bash
+liquibase --driver=com.mysql.cj.jdbc.Driver --classpath=F:\software_install\gradle\.gradle\caches\modules-2\files-2.1\mysql\mysql-connector-java\8.0.18\e088efaa4b568bc7d9f7274b9c5ea1a00da1a45c\mysql-connector-java-8.0.18.jar --changeLogFile=E:\test\testForIdea\mo-api\src\main\resources\db\changelog\db.changelog-master.yaml --url="jdbc:mysql://127.0.0.1:3306/mo?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true" --username=root --password=123456 generateChangeLog
+```
+
 
 
