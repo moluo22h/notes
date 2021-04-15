@@ -27,3 +27,6 @@ nbdist/
 
 ### GitBook ###
 _book/
+
+### NPM ###
+node_modules/
