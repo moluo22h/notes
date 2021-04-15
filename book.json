@@ -1,3 +1,7 @@
 {
-    "plugins": ["summary"]
+    "title": "notes",
+    "ignores": [
+        "_book",
+        "node_modules"
+    ]
 }
