@@ -801,6 +801,114 @@ public class $!{tableInfo.name}Controller {
 }
 ```
 
+## JPA模板后期变更（2020-4-27）
+
+### serviceImpl.java
+
+```java
+##定义初始变量
+#set($tableName = $tool.append($tableInfo.name, "ServiceImpl"))
+##设置回调
+$!callback.setFileName($tool.append($tableName, ".java"))
+$!callback.setSavePath($tool.append($tableInfo.savePath, "/service/impl"))
+
+##拿到主键
+#if(!$tableInfo.pkColumn.isEmpty())
+    #set($pk = $tableInfo.pkColumn.get(0))
+#end
+
+#if($tableInfo.savePackageName)package $!{tableInfo.savePackageName}.#{end}service.impl;
+
+import $!{tableInfo.savePackageName}.entity.$!{tableInfo.name};
+import $!{tableInfo.savePackageName}.repository.$!{tableInfo.name}Repository;
+import $!{tableInfo.savePackageName}.service.$!{tableInfo.name}Service;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Service;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+/**
+ * $!{tableInfo.comment}($!{tableInfo.name})表服务实现类
+ *
+ * @author $!author
+ * @since $!time.currTime("yyyy/MM/dd")
+ */
+@Slf4j
+@Service("$!tool.firstLowerCase($!{tableInfo.name})Service")
+public class $!{tableInfo.name}ServiceImpl implements $!{tableInfo.name}Service {
+
+    @Autowired
+    private $!{tableInfo.name}Repository $!tool.firstLowerCase($!{tableInfo.name})Repository;
+
+    @Override
+    public $!{tableInfo.name} create$!{tableInfo.name}($!{tableInfo.name} $!tool.firstLowerCase($!{tableInfo.name})) {
+        return $!{tool.firstLowerCase($!{tableInfo.name})}Repository.save($!tool.firstLowerCase($!{tableInfo.name}));
+    }
+
+    @Override
+    public void delete$!{tableInfo.name}(String id) {
+        $!{tool.firstLowerCase($!{tableInfo.name})}Repository.deleteById(id);
+    }
+
+    @Override
+    public List<$!{tableInfo.name}> list$!{tableInfo.name}s() {
+        return $!{tool.firstLowerCase($!{tableInfo.name})}Repository.findAll();
+    }
+
+    @Override
+    public Page<$!{tableInfo.name}> list$!{tableInfo.name}s(Map<String, Object> queryParams, Pageable pageable) {
+        Specification<$!{tableInfo.name}> specification = new Specification<$!{tableInfo.name}>() {
+            @Override
+            public Predicate toPredicate(Root<$!{tableInfo.name}> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+                List<Predicate> list = new ArrayList<>();
+#foreach($column in $tableInfo.otherColumn)
+                //  若$!{column.name}存在，根据$!{column.name}过滤
+                final String $!{column.name}Key = "$!{column.name}";
+                if (StringUtils.isNotBlank((String) queryParams.get($!{column.name}Key))) {
+                    list.add(criteriaBuilder.equal(root.get($!{column.name}Key).as($!{tool.getClsNameByFullName($column.type)}.class), queryParams.get($!{column.name}Key)));
+                }
+#end
+                Predicate[] predicates = new Predicate[list.size()];
+                return criteriaBuilder.and(list.toArray(predicates));
+            }
+        };
+        return $!{tool.firstLowerCase($!{tableInfo.name})}Repository.findAll(specification, pageable);
+    }
+
+    @Override
+    public $!{tableInfo.name} get$!{tableInfo.name}(String id) {
+        Optional<$!{tableInfo.name}> optional = $!{tool.firstLowerCase($!{tableInfo.name})}Repository.findById(id);
+        if (!optional.isPresent()) {
+            throw new RuntimeException();
+        }
+        return optional.get();
+    }
+
+    @Override
+    public $!{tableInfo.name} update$!{tableInfo.name}(String id, $!{tableInfo.name} $!tool.firstLowerCase($!{tableInfo.name})) {
+        $!{tableInfo.name} raw$!{tableInfo.name} = get$!{tableInfo.name}(id);
+        if (raw$!{tableInfo.name} == null) {
+            throw new RuntimeException("请求的id不存在");
+        }
+        MyBeanUtils.copyNoNullProperties($!{tool.firstLowerCase($!{tableInfo.name})}, raw$!{tableInfo.name});
+        return $!{tool.firstLowerCase($!{tableInfo.name})}Repository.save(raw$!{tableInfo.name});
+    }
+
+}
+```
+
 ## 测试
 
 若想要测试如上模板得可用性，记得在创建表时添加`表描述`和`字段描述`，可参考下面的sql语句：
