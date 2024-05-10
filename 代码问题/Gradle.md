@@ -12,3 +12,8 @@ gradle的默认仓库路径为用户目录下的.gradle目录，gradle并没有�
 
 到  [gradle下载地址](http://services.gradle.org/distributions/)下载gradle之后，放到GRADLE_USER_HOME\\.gradle\wrapper\dists下解压
 
+
+
+## More than one file was found with OS independent path 'META-INF/gradle/incremental.annotation.proces
+
+[Gradle问题排查：More than one file was found with OS independent path ‘META-INF/INDEX.LIST](https://blog.csdn.net/luqingshuai_eloong/article/details/111475621)
