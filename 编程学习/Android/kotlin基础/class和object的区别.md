@@ -1,0 +1,1 @@
+[Kotlin class、data class、object、companion object区别（自己备查）_kotlin object和class区别-CSDN博客](https://blog.csdn.net/HDFQQ188816190/article/details/103976516)

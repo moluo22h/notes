@@ -92,6 +92,16 @@ dependencies {
 
 https://blog.csdn.net/u012443641/article/details/81295999
 
+
+
+## idea配置springboot启动参数
+
+参考文档
+
+[[总结\] Idea两种方式设置spring boot应用配置参数_idea配置springboot启动参数-CSDN博客](https://blog.csdn.net/li396864285/article/details/83576829)
+
+
+
 ## idea激活码
 激活服务器：http://idea.wrbugtest.tk/
 ```
