@@ -50,7 +50,7 @@ if __name__ == '__main__':
 
 你可以在路由中定义参数，这些参数会作为变量传递给处理函数。例如：
 
-```
+```python
 @app.route('/user/<username>')
 def show_user_profile(username):
     return f'User {username}'
@@ -62,7 +62,7 @@ def show_user_profile(username):
 
 Flask 支持不同的 HTTP 方法，如 GET、POST、PUT、DELETE 等。你可以通过methods参数来指定路由支持的 HTTP 方法。例如：
 
-```
+```python
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -81,10 +81,11 @@ def login():
 
 对于 GET 请求，参数通常包含在 URL 中。例如，访问/search?q=python，可以通过以下方式获取q参数的值：
 
-```
+```python
 from flask import request
 
-@app.route('/search')
+
+.route('/search')
 def search():
     query = request.args.get('q')
     return f'Searching for {query}'
@@ -92,7 +93,7 @@ def search():
 
 对于 POST 请求，参数通常包含在请求体中。假设前端通过表单提交数据，你可以这样获取：
 
-```
+```python
 @app.route('/submit', methods=['POST'])
 def submit():
     name = request.form.get('name')
@@ -106,7 +107,7 @@ Flask 的处理函数返回的内容就是响应给客户端的内容。除了�
 
 返回 JSON 数据：
 
-```
+```python
 from flask import jsonify
 
 @app.route('/data')
@@ -123,7 +124,7 @@ Flask 默认使用 Jinja2 作为模板引擎，它允许你将动态数据嵌入
 
 例如，创建一个index.html模板文件：
 
-```
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -138,7 +139,7 @@ Flask 默认使用 Jinja2 作为模板引擎，它允许你将动态数据嵌入
 
 然后在 Flask 应用中渲染这个模板：
 
-```
+```python
 from flask import render_template
 
 @app.route('/')
@@ -156,7 +157,7 @@ def index():
 
 使用 pip 安装 SQLAlchemy：
 
-```
+```bash
 pip install sqlalchemy flask_sqlalchemy
 ```
 
@@ -166,7 +167,7 @@ flask_sqlalchemy是专门为 Flask 应用设计的扩展，它简化了 SQLAlche
 
 在 Flask 应用中初始化 SQLAlchemy：
 
-```
+```python
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
@@ -185,7 +186,7 @@ db = SQLAlchemy(app)
 
 数据库模型是对数据库表结构的抽象，通过 Python 类来表示。例如，定义一个User模型：
 
-```
+```python
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
@@ -203,7 +204,7 @@ class User(db.Model):
 
 #### 添加数据
 
-```
+```python
 @app.route('/add_user', methods=['POST'])
 def add_user():
     data = request.get_json()
@@ -217,7 +218,7 @@ def add_user():
 
 #### 查询数据
 
-```
+```python
 @app.route('/get_users')
 def get_users():
     users = User.query.all()
@@ -229,7 +230,7 @@ def get_users():
 
 #### 更新数据
 
-```
+```python
 @app.route('/update_user/<int:user_id>', methods=['PUT'])
 def update_user(user_id):
     data = request.get_json()
@@ -246,7 +247,7 @@ def update_user(user_id):
 
 #### 删除数据
 
-```
+```python
 @app.route('/delete_user/<int:user_id>', methods=['DELETE'])
 def delete_user(user_id):
     user = User.query.get(user_id)
@@ -279,7 +280,7 @@ def delete_user(user_id):
 
 首先，创建一个users蓝图：
 
-```
+```python
 from flask import Blueprint, jsonify
 
 # 创建users蓝图，第一个参数是蓝图的名称，第二个参数是模块名
@@ -299,7 +300,7 @@ def get_user(user_id):
 
 接着，创建一个articles蓝图：
 
-```
+```python
 from flask import Blueprint, jsonify
 
 articles_bp = Blueprint('articles', __name__)
@@ -317,7 +318,7 @@ def get_article(article_id):
 
 最后，在主应用中注册这两个蓝图：
 
-```
+```python
 from flask import Flask
 
 app = Flask(__name__)
@@ -391,7 +392,7 @@ my_blog/
 
 Flask 支持从配置文件中加载配置。常见的配置文件格式有 Python 文件（.py）、JSON 文件（.json）和 YAML 文件（.yaml）。以 Python 配置文件为例，在项目根目录下创建一个[config.py](http://config.py)文件：
 
-```
+```python
 # config.py
 DEBUG = True
 SECRET_KEY = 'your_secret_key'
@@ -403,7 +404,7 @@ SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 然后在 Flask 应用中加载这个配置文件：
 
-```
+```python
 from flask import Flask
 
 app = Flask(__name__)
@@ -416,7 +417,7 @@ app.config.from_pyfile方法会读取指定的 Python 配置文件，并将其�
 
 除了使用配置文件，还可以通过定义配置类来管理配置。在[config.py](http://config.py)中定义多个配置类，每个类对应不同的环境配置：
 
-```
+```python
 class BaseConfig:
     DEBUG = False
     SECRET_KEY = 'your_secret_key'
@@ -434,7 +435,7 @@ BaseConfig类定义了一些通用的基础配置，DevelopmentConfig类继承�
 
 在 Flask 应用中加载配置类：
 
-```
+```python
 from flask import Flask
 
 app = Flask(__name__)
@@ -448,13 +449,13 @@ app.config.from_object方法通过传入配置类的路径，将配置类中的�
 
 在实际开发中，经常需要在开发、测试和生产等不同环境下切换配置。可以通过环境变量来实现这一需求。例如，在启动 Flask 应用时，设置一个FLASK_ENV环境变量来指定当前环境：
 
-```
+```python
 export FLASK_ENV=development
 ```
 
 在 Flask 应用中根据环境变量加载不同的配置：
 
-```
+```python
 import os
 from flask import Flask
 
@@ -475,7 +476,7 @@ else:
 
 在某些情况下，可能需要在运行时动态更新配置。Flask 的app.config是一个字典，可以直接修改其中的配置项：
 
-```
+```python
 @app.route('/update_config', methods=['POST'])
 def update_config():
     data = request.get_json()
@@ -493,13 +494,13 @@ def update_config():
 
 首先，安装 Gunicorn：
 
-```python
+```bash
 pip install gunicorn
 ```
 
 然后，使用 Gunicorn 启动 Flask 应用：
 
-```python
+```bash
 gunicorn -w 4 -b 127.0.0.1:8000 your_app:app
 ```
 
